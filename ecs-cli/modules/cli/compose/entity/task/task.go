@@ -391,6 +391,8 @@ func (t *Task) buildRunTaskInput(taskDefinition string, count int, overrides map
 		runTaskInput.PlatformVersion = aws.String(config.PlatformVersion140)
 	}
 
+	runTaskInput.EnableExecuteCommand = &t.Context().CommandConfig.EnableExecuteCommand
+
 	return runTaskInput, nil
 }
 

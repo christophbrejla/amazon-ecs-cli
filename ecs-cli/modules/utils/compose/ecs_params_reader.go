@@ -43,16 +43,22 @@ type ECSParams struct {
 
 // EcsTaskDef corresponds to fields in an ECS TaskDefinition
 type EcsTaskDef struct {
-	NetworkMode          string         `yaml:"ecs_network_mode"`
-	TaskRoleArn          string         `yaml:"task_role_arn"`
-	PIDMode              string         `yaml:"pid_mode"`
-	IPCMode              string         `yaml:"ipc_mode"`
-	ContainerDefinitions ContainerDefs  `yaml:"services"`
-	ExecutionRole        string         `yaml:"task_execution_role"`
-	TaskSize             TaskSize       `yaml:"task_size"` // Needed to run FARGATE tasks
-	DockerVolumes        []DockerVolume `yaml:"docker_volumes"`
-	EFSVolumes           []EFSVolume    `yaml:"efs_volumes"`
-	PlacementConstraints []Constraint   `yaml:"placement_constraints"`
+	NetworkMode          string           `yaml:"ecs_network_mode"`
+	TaskRoleArn          string           `yaml:"task_role_arn"`
+	PIDMode              string           `yaml:"pid_mode"`
+	IPCMode              string           `yaml:"ipc_mode"`
+	ContainerDefinitions ContainerDefs    `yaml:"services"`
+	ExecutionRole        string           `yaml:"task_execution_role"`
+	TaskSize             TaskSize         `yaml:"task_size"` // Needed to run FARGATE tasks
+	DockerVolumes        []DockerVolume   `yaml:"docker_volumes"`
+	EFSVolumes           []EFSVolume      `yaml:"efs_volumes"`
+	PlacementConstraints []Constraint     `yaml:"placement_constraints"`
+	EphemeralStorage     EphemeralStorage `yaml:"ephemeral_storage"`
+}
+
+// EphemeralStorage contains the ephemeral storage information parsed from the ecs-params.yml file
+type EphemeralStorage struct {
+	SizeInGib int64 `yaml:"size_in_gib"`
 }
 
 // ContainerDefs is a map of ContainerDefs within a task definition

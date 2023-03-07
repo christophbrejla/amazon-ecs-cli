@@ -28,7 +28,7 @@ func UpCommand() cli.Command {
 		Usage:        usage.ClusterUp,
 		Before:       ecscli.BeforeApp,
 		Action:       cluster.ClusterUp,
-		Flags:        flags.AppendFlags(clusterUpFlags(), flags.OptionalConfigFlags(), flags.OptionalLaunchTypeFlag(), flags.DebugFlag()),
+		Flags:        flags.AppendFlags(clusterUpFlags(), flags.OptionalConfigFlags(), flags.OptionalLaunchTypeFlag(), flags.DebugFlag(), flags.OptionalEnableExecuteCommandFlag()),
 		OnUsageError: flags.UsageErrorFactory("up"),
 	}
 }

@@ -41,6 +41,7 @@ type CommandConfig struct {
 	ComposeProjectNamePrefix string // Deprecated; remains for backwards compatibility
 	CFNStackName             string
 	LaunchType               string
+	EnableExecuteCommand     bool
 }
 
 func (c *CommandConfig) Region() string {
@@ -90,6 +91,8 @@ func NewCommandConfig(context *cli.Context, rdwr ReadWriter) (*CommandConfig, er
 		ecsConfig.CFNStackName = flags.CFNStackNamePrefixDefaultValue + ecsConfig.Cluster
 	}
 
+	enableExecuteCommand := context.Bool(flags.EnableExecuteCommandFlag)
+
 	return &CommandConfig{
 		Cluster:                  ecsConfig.Cluster,
 		Session:                  svcSession,
@@ -97,6 +100,7 @@ func NewCommandConfig(context *cli.Context, rdwr ReadWriter) (*CommandConfig, er
 		ComposeProjectNamePrefix: ecsConfig.ComposeProjectNamePrefix, // deprecated; remains for backwards compatibility
 		CFNStackName:             ecsConfig.CFNStackName,
 		LaunchType:               ecsConfig.DefaultLaunchType,
+		EnableExecuteCommand:     enableExecuteCommand,
 	}, nil
 }
 

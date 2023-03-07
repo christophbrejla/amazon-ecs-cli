@@ -134,10 +134,17 @@ func ConvertToTaskDefinition(params ConvertTaskDefParams) (*ecs.TaskDefinition, 
 		Volumes:              ecsVolumes,
 		TaskRoleArn:          aws.String(params.TaskRoleArn),
 		NetworkMode:          aws.String(taskDefParams.networkMode),
-		Cpu:                  aws.String(taskDefParams.cpu),
 		Memory:               aws.String(taskDefParams.memory),
+		Cpu:                  aws.String(taskDefParams.cpu),
 		ExecutionRoleArn:     aws.String(executionRoleArn),
 		PlacementConstraints: placementConstraints,
+	}
+
+	ephS := params.ECSParams.TaskDefinition.EphemeralStorage
+	if ephS.SizeInGib > 0 {
+		taskDefinition.SetEphemeralStorage(&ecs.EphemeralStorage{
+			SizeInGiB: &ephS.SizeInGib,
+		})
 	}
 
 	// Set launch type

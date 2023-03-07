@@ -80,9 +80,10 @@ const (
 	CFNStackNameFlag                     = "cfn-stack-name"
 	CFNStackNamePrefixDefaultValue       = utils.ECSCLIResourcePrefix
 
-	LaunchTypeFlag         = "launch-type"
-	DefaultLaunchTypeFlag  = "default-launch-type"
-	SchedulingStrategyFlag = "scheduling-strategy"
+	EnableExecuteCommandFlag = "enable-execute-command"
+	LaunchTypeFlag           = "launch-type"
+	DefaultLaunchTypeFlag    = "default-launch-type"
+	SchedulingStrategyFlag   = "scheduling-strategy"
 
 	//attribute-checker
 	ContainerInstancesFlag = "container-instances"
@@ -280,6 +281,15 @@ func DebugFlag() []cli.Flag {
 		cli.BoolFlag{
 			Name:  VerboseFlag + ",debug",
 			Usage: "[Optional] Increase the verbosity of command output to aid in diagnostics.",
+		},
+	}
+}
+
+func OptionalEnableExecuteCommandFlag() []cli.Flag {
+	return []cli.Flag{
+		cli.BoolFlag{
+			Name:  EnableExecuteCommandFlag,
+			Usage: "[Optional] If passed with true, execute-command is enabled for the task to be started.",
 		},
 	}
 }
